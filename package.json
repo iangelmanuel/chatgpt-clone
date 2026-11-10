@@ -1,29 +1,44 @@
 {
   "name": "chatgpt-clone",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "ai": "^3.1.17",
-    "next": "14.2.3",
-    "openai-edge": "^1.2.2",
-    "react": "18",
-    "react-dom": "18"
+    "check": "next typegen && tsc --noEmit",
+    "lint": "eslint",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix",
+    "prettier": "prettier --write .",
+    "prettier:check": "prettier . --check"
   },
   "devDependencies": {
-    "@types/node": "20",
-    "@types/react": "18",
-    "@types/react-dom": "18",
-    "eslint": "8",
-    "eslint-config-next": "14.2.3",
-    "postcss": "8",
-    "standard": "17.1.0",
-    "tailwindcss": "3.4.1",
-    "typescript": "5"
+    "@tailwindcss/postcss": "4.3.5",
+    "@trivago/prettier-plugin-sort-imports": "6.0.2",
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "eslint": "10.14.0",
+    "eslint-config-next": "16.4.5",
+    "eslint-config-prettier": "10.1.8",
+    "postcss": "8.5.32",
+    "prettier": "3.9.10",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "typescript": "6.0.3"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "4.0.111",
+    "@ai-sdk/react": "4.0.170",
+    "ai": "7.0.166",
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "tailwindcss": "4.3.5"
+  },
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": ">=26.13.0",
+    "pnpm": ">=12.18.0"
   }
 }

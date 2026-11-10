@@ -1,21 +1,19 @@
-import { NextResponse, type NextRequest } from 'next/server'
-import { OpenAIStream, StreamingTextResponse } from 'ai'
-import { openai } from '@/lib'
+import { NextResponse } from "next/server"
+import { openai } from "@ai-sdk/openai"
+import { type UIMessage, convertToModelMessages, streamText } from "ai"
 
-export async function POST(req: NextRequest) {
-  const { messages } = await req.json()
+export async function POST(req: Request) {
+  const { messages }: { messages: UIMessage[] } = await req.json()
 
   try {
-    const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      stream: true,
-      messages,
+    const result = streamText({
+      model: openai("gpt-3.5-turbo"),
+      messages: await convertToModelMessages(messages)
     })
 
-    const stream = OpenAIStream(response)
-    return new StreamingTextResponse(stream)
+    return result.toUIMessageStreamResponse()
   } catch (error) {
     console.log(error)
-    NextResponse.json('Internal server error', { status: 500 })
+    return NextResponse.json("Internal server error", { status: 500 })
   }
 }
